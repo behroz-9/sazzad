@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sazzad Hossain | Man of Steel Dossier</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Orbitron, Russo One & Rajdhani -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Russo+One&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        krypton: {
+                            bg: '#040914',
+                            blue: '#0a192f',
+                            royal: '#0d2850',
+                            brightBlue: '#00d2ff',
+                            red: '#ff003c',
+                            gold: '#ffd700',
+                            goldDark: '#e6a100',
+                            steel: '#8fa0bd',
+                            card: 'rgba(9, 21, 46, 0.85)'
+                        }
+                    },
+                    fontFamily: {
+                        orbitron: ['Orbitron', 'sans-serif'],
+                        russo: ['Russo One', 'sans-serif'],
+                        rajdhani: ['Rajdhani', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Dynamic Cosmic Grid Overlay */
+        .fortress-grid {
+            background-size: 50px 50px;
+            background-image: 
+                linear-gradient(to right, rgba(0, 210, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 210, 255, 0.04) 1px, transparent 1px);
+        }
+
+        /* Heroic Superman Metallic Crest Text */
+        .superman-title {
+            background: linear-gradient(180deg, #ffffff 0%, #ffd700 40%, #ff003c 90%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 15px rgba(255, 0, 60, 0.6));
+        }
+
+        /* Glassmorphism Panel with Crimson & Gold Trims */
+        .hero-card {
+            background: linear-gradient(135deg, rgba(13, 40, 80, 0.8) 0%, rgba(5, 14, 31, 0.9) 100%);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), inset 0 0 15px rgba(255, 0, 60, 0.15);
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+        }
+
+        .hero-card:hover {
+            border-color: rgba(255, 0, 60, 0.8);
+            box-shadow: 0 0 25px rgba(255, 0, 60, 0.4), 0 0 10px rgba(255, 215, 0, 0.3), inset 0 0 20px rgba(255, 0, 60, 0.25);
+            transform: translateY(-4px) scale(1.01);
+        }
+
+        /* Kryptonian Corner Cut Decors */
+        .krypton-corner {
+            position: relative;
+        }
+        .krypton-corner::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            width: 12px;
+            height: 12px;
+            border-top: 3px solid #ffd700;
+            border-left: 3px solid #ffd700;
+            box-shadow: 0 0 8px #ffd700;
+        }
+        .krypton-corner::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            right: -2px;
+            width: 12px;
+            height: 12px;
+            border-bottom: 3px solid #ff003c;
+            border-right: 3px solid #ff003c;
+            box-shadow: 0 0 8px #ff003c;
+        }
+
+        /* Animated Audio Visualizer */
+        @keyframes kryptonWave {
+            0%, 100% { height: 4px; }
+            50% { height: 22px; }
+        }
+        .viz-bar { animation: kryptonWave 0.8s infinite ease-in-out; }
+        .viz-bar.paused { animation-play-state: paused !important; height: 4px !important; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #040914; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(#ff003c, #ffd700); border-radius: 4px; }
+
+        @keyframes shieldGlow {
+            0%, 100% { opacity: 0.15; transform: scale(1) rotate(0deg); }
+            50% { opacity: 0.3; transform: scale(1.04) rotate(1deg); }
+        }
+        .animate-shield-glow { animation: shieldGlow 6s infinite ease-in-out; }
+    </style>
+</head>
+<body class="bg-krypton-bg text-gray-100 font-rajdhani antialiased selection:bg-krypton-red selection:text-white min-h-screen relative overflow-x-hidden">
+
+    <!-- Background Grid -->
+    <div class="fixed inset-0 fortress-grid z-0 opacity-60 pointer-events-none"></div>
+
+    <!-- Background Particle Canvas (Solar Sparks & Red Kryptonite Energy) -->
+    <canvas id="supermanCanvas" class="fixed inset-0 z-0 pointer-events-none"></canvas>
+
+    <!-- Glowing Superman House of El Crest Watermark -->
+    <div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none animate-shield-glow">
+        <svg width="600" height="600" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-[85vw] max-w-[650px] opacity-20 filter drop-shadow-[0_0_30px_rgba(255,0,60,0.8)]">
+            <!-- Shield Outline -->
+            <polygon points="250,30 450,110 400,430 250,480 100,430 50,110" fill="rgba(13,40,80,0.4)" stroke="#ffd700" stroke-width="12"/>
+            <polygon points="250,45 430,120 385,415 250,460 115,415 70,120" fill="none" stroke="#ff003c" stroke-width="6"/>
+            <!-- 'S' Symbol -->
+            <path d="M 180 120 L 340 120 C 370 120 370 180 330 190 L 190 220 C 140 230 140 330 210 340 L 330 340" stroke="#ffd700" stroke-width="42" stroke-linecap="square" fill="none"/>
+            <path d="M 180 120 L 340 120 C 370 120 370 180 330 190 L 190 220 C 140 230 140 330 210 340 L 330 340" stroke="#ff003c" stroke-width="20" stroke-linecap="square" fill="none"/>
+        </svg>
+    </div>
+
+    <!-- Justin Bieber Audio Player Header Widget -->
+    <div class="fixed top-3 right-3 sm:top-5 sm:right-5 z-50 max-w-[calc(100vw-24px)] sm:max-w-sm">
+        <div class="hero-card p-3 rounded-2xl flex items-center gap-3 border-krypton-gold/50 shadow-2xl">
+            <!-- Album Art Frame -->
+            <div class="relative w-11 h-11 sm:w-12 sm:h-12 rounded-xl overflow-hidden border-2 border-krypton-gold flex-shrink-0 shadow-lg shadow-krypton-red/30">
+                <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=200" 
+                     alt="Justin Bieber Cover" 
+                     class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-krypton-red/40 to-transparent"></div>
+            </div>
+
+            <!-- Track Info & Controls -->
+            <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between">
+                    <span class="text-[10px] font-orbitron text-krypton-gold tracking-widest uppercase flex items-center gap-1 font-bold">
+                        <i class="fa-solid fa-compact-disc text-krypton-red animate-spin"></i> BGM AUDIO
+                    </span>
+                    <!-- Equalizer Visualizer Bars -->
+                    <div id="visualizer" class="flex items-end gap-0.5 h-5 px-1">
+                        <div class="viz-bar paused w-1 bg-krypton-red rounded-t" style="animation-delay: 0.1s"></div>
+                        <div class="viz-bar paused w-1 bg-krypton-gold rounded-t" style="animation-delay: 0.3s"></div>
+                        <div class="viz-bar paused w-1 bg-krypton-brightBlue rounded-t" style="animation-delay: 0.2s"></div>
+                        <div class="viz-bar paused w-1 bg-krypton-red rounded-t" style="animation-delay: 0.4s"></div>
+                    </div>
+                </div>
+                <h4 class="text-xs sm:text-sm font-orbitron font-bold text-white truncate leading-tight mt-0.5">
+                    Justin Bieber - Stay (Krypton Mix)
+                </h4>
+                <div class="flex items-center gap-2 mt-1">
+                    <i class="fa-solid fa-volume-high text-[10px] text-krypton-gold"></i>
+                    <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="0.6" class="w-16 h-1 bg-krypton-blue rounded-lg appearance-none cursor-pointer accent-krypton-red">
+                    <span id="volumeValue" class="text-[10px] font-mono text-krypton-steel">60%</span>
+                </div>
+            </div>
+
+            <!-- Audio Play / Pause Button -->
+            <button id="musicToggleBtn" class="w-10 h-10 rounded-xl bg-gradient-to-br from-krypton-red to-red-700 border border-krypton-gold text-white flex items-center justify-center hover:scale-105 active:scale-95 transition-all flex-shrink-0 shadow-lg shadow-krypton-red/50">
+                <i id="musicIcon" class="fa-solid fa-play text-sm"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Hidden Audio Player -->
+    <audio id="bgMusic" loop preload="metadata">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Main Dashboard View Container -->
+    <div class="relative z-10 max-w-7xl mx-auto px-4 py-8 md:py-12 space-y-8">
+
+        <!-- HEADER BANNER / PROFILE SECTION -->
+        <header class="relative hero-card rounded-3xl p-6 sm:p-10 krypton-corner overflow-hidden text-center border-2 border-krypton-gold/40">
+            <!-- Radiant Kryptonian Sun Glow -->
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-gradient-to-b from-krypton-gold/20 via-krypton-red/10 to-transparent blur-3xl rounded-full pointer-events-none"></div>
+
+            <div class="relative z-10 flex flex-col items-center">
+                <!-- Hero Avatar Frame -->
+                <div class="relative mb-6 group cursor-pointer">
+                    <!-- Glowing Crest Halo Outer -->
+                    <div class="absolute -inset-2 bg-gradient-to-r from-krypton-gold via-krypton-red to-krypton-brightBlue rounded-full blur-md opacity-80 group-hover:opacity-100 transition duration-500 animate-pulse"></div>
+                    
+                    <!-- Kryptonian Shield Shaped Avatar Frame -->
+                    <div class="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full border-4 border-krypton-gold bg-krypton-blue p-1.5 shadow-2xl overflow-hidden flex items-center justify-center">
+                        <img src="z.png" 
+                             alt="Sazzad Hossain Man of Steel" 
+                             class="w-full h-full object-cover rounded-full filter contrast-125 brightness-105 group-hover:scale-110 transition duration-500"
+                             onerror="this.onerror=null; this.src='https://placehold.co/400x400/0d2850/ffd700?text=SAZZAD+S';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-krypton-red/30 via-transparent to-krypton-gold/20 pointer-events-none"></div>
+                    </div>
+
+                    <!-- Glowing S-Badge Tag -->
+                    <div class="absolute -bottom-2 bg-gradient-to-r from-krypton-red to-red-800 border-2 border-krypton-gold px-3.5 py-1 rounded-full text-white text-xs font-russo shadow-xl flex items-center gap-1.5 tracking-wider">
+                        <i class="fa-solid fa-shield-halved text-krypton-gold"></i>
+                        <span>HOUSE OF EL</span>
+                    </div>
+                </div>
+
+                <!-- Heroic Superman Title -->
+                <h1 class="font-russo text-3xl sm:text-6xl md:text-7xl tracking-wider mb-2 superman-title uppercase">
+                    SAZZAD HOSSAIN
+                </h1>
+
+                <!-- Subtitle Badges -->
+                <div class="flex flex-wrap items-center justify-center gap-3 mt-3 text-sm md:text-base font-bold">
+                    <span class="hero-card px-4 py-1.5 rounded-full border border-krypton-gold/60 text-krypton-gold flex items-center gap-2 shadow-lg">
+                        <i class="fa-solid fa-mask text-krypton-red"></i> MAN OF STEEL
+                    </span>
+                    <span class="hero-card px-4 py-1.5 rounded-full border border-krypton-red/60 text-white flex items-center gap-2 shadow-lg">
+                        <i class="fa-solid fa-shield-cat text-krypton-gold"></i> USN PROTECTOR • AGE: 17
+                    </span>
+                </div>
+            </div>
+        </header>
+
+        <!-- GRID SECTION 1: IDENTITY & ACADEMY -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <!-- IDENTITY DOSSIER CARD -->
+            <section class="hero-card rounded-2xl p-6 krypton-corner relative flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between pb-4 mb-4 border-b border-krypton-gold/30">
+                        <h2 class="font-russo text-xl text-krypton-gold flex items-center gap-2 tracking-wide">
+                            <i class="fa-solid fa-address-card text-krypton-red"></i> KRYPTONIAN IDENTITY
+                        </h2>
+                        <span class="text-[10px] font-orbitron text-krypton-red bg-krypton-red/10 border border-krypton-red/40 px-2.5 py-0.5 rounded-full font-bold">HERO DOSSIER</span>
+                    </div>
+
+                    <div class="space-y-3 font-semibold text-base">
+                        <div class="flex justify-between items-center p-3 rounded-xl bg-krypton-blue/60 border border-krypton-gold/20 hover:border-krypton-gold/60 transition">
+                            <span class="text-krypton-steel text-sm font-orbitron flex items-center gap-2">
+                                <i class="fa-solid fa-user text-krypton-gold w-4"></i> NAME
+                            </span>
+                            <span class="text-white font-russo tracking-wide cursor-pointer copy-btn flex items-center gap-2" data-copy="Sazzad Hossain" title="Click to copy">
+                                Sazzad Hossain <i class="fa-regular fa-copy text-xs text-krypton-gold opacity-80"></i>
+                            </span>
+                        </div>
+
+                        <div class="flex justify-between items-center p-3 rounded-xl bg-krypton-blue/60 border border-krypton-gold/20 hover:border-krypton-gold/60 transition">
+                            <span class="text-krypton-steel text-sm font-orbitron flex items-center gap-2">
+                                <i class="fa-solid fa-cake-candles text-krypton-red w-4"></i> DOB
+                            </span>
+                            <span class="text-white font-bold tracking-wide">26 June 2009</span>
+                        </div>
+
+                        <div class="flex justify-between items-center p-3 rounded-xl bg-krypton-blue/60 border border-krypton-gold/20 hover:border-krypton-gold/60 transition">
+                            <span class="text-krypton-steel text-sm font-orbitron flex items-center gap-2">
+                                <i class="fa-solid fa-baseball-bat-ball text-krypton-gold w-4"></i> HOBBY
+                            </span>
+                            <span class="text-krypton-gold font-russo tracking-wider">Cricket (Batting & Pace)</span>
+                        </div>
+
+                        <div class="flex justify-between items-center p-3 rounded-xl bg-krypton-blue/60 border border-krypton-gold/20 hover:border-krypton-gold/60 transition">
+                            <span class="text-krypton-steel text-sm font-orbitron flex items-center gap-2">
+                                <i class="fa-solid fa-heart-circle-xmark text-krypton-red w-4"></i> GF STATUS
+                            </span>
+                            <span class="bg-gradient-to-r from-krypton-red/80 to-red-900 text-white text-xs px-3 py-1 rounded-full border border-krypton-gold font-russo shadow-md">
+                                Single (Nai) - Hero Mode Active!
+                            </span>
+                        </div>
+
+                        <div class="flex justify-between items-center p-3 rounded-xl bg-krypton-blue/60 border border-krypton-gold/20 hover:border-krypton-gold/60 transition">
+                            <span class="text-krypton-steel text-sm font-orbitron flex items-center gap-2">
+                                <i class="fa-solid fa-earth-americas text-krypton-brightBlue w-4"></i> ORIGIN
+                            </span>
+                            <span class="text-krypton-gold font-russo flex items-center gap-1.5">
+                                <span>🇧🇩</span> USN <span class="text-xs font-rajdhani font-semibold text-krypton-steel">(United States of Noakhali)</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ACADEMY RECORDS CARD -->
+            <section class="hero-card rounded-2xl p-6 krypton-corner flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between pb-4 mb-4 border-b border-krypton-gold/30">
+                        <h2 class="font-russo text-xl text-krypton-gold flex items-center gap-2 tracking-wide">
+                            <i class="fa-solid fa-building-columns text-krypton-red"></i> ACADEMY RECORDS
+                        </h2>
+                        <span class="text-[10px] font-orbitron text-emerald-400 bg-emerald-950/50 border border-emerald-500/40 px-2.5 py-0.5 rounded-full font-bold">KRYPTON SECTOR</span>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="p-5 rounded-2xl bg-gradient-to-r from-krypton-blue/80 to-krypton-royal/90 border border-krypton-gold/40 relative overflow-hidden group shadow-lg">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-krypton-gold/10 rounded-full blur-2xl group-hover:bg-krypton-red/20 transition duration-500"></div>
+                            
+                            <div class="flex items-start gap-4 relative z-10">
+                                <div class="p-3.5 bg-krypton-bg/80 rounded-2xl text-krypton-gold text-3xl border border-krypton-gold/50 shadow-inner">
+                                    <i class="fa-solid fa-graduation-cap"></i>
+                                </div>
+                                <div class="space-y-1">
+                                    <h3 class="font-russo text-xl text-white group-hover:text-krypton-gold transition">
+                                        Rakanpur High School
+                                    </h3>
+                                    <p class="text-xs font-orbitron text-krypton-steel">Secondary Sector Headquarters</p>
+                                    <div class="pt-3 flex items-center gap-2">
+                                        <span class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-400 bg-emerald-950/80 px-3 py-1 rounded-full border border-emerald-500/40">
+                                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> Currently Studying / Future Titan
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-3.5 rounded-xl bg-krypton-blue/40 border border-krypton-gold/20 text-xs text-krypton-steel flex items-center gap-3">
+                            <i class="fa-solid fa-shield text-krypton-gold text-xl flex-shrink-0"></i>
+                            <span>Academic progress in status optimal. Balancing solar cricket power with academic excellence at Rakanpur High School.</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- GRID SECTION 2: SKILLS & POWERS -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <!-- SUPERPOWERS & MASTERY SKILLS CARD -->
+            <section class="hero-card rounded-2xl p-6 krypton-corner">
+                <div class="flex items-center justify-between pb-4 mb-4 border-b border-krypton-gold/30">
+                    <h2 class="font-russo text-xl text-krypton-gold flex items-center gap-2 tracking-wide">
+                        <i class="fa-solid fa-bolt text-krypton-red"></i> SUPERPOWERS & MASTERY
+                    </h2>
+                    <span class="text-[10px] font-orbitron text-krypton-steel">SOLAR CAPACITY</span>
+                </div>
+
+                <div class="space-y-5">
+                    <div>
+                        <div class="flex justify-between text-sm font-orbitron mb-1.5">
+                            <span class="text-gray-100 flex items-center gap-2 font-bold">
+                                <i class="fa-solid fa-baseball-bat-ball text-krypton-gold"></i> Cricket Power Batting
+                            </span>
+                            <span class="text-krypton-gold font-russo">99%</span>
+                        </div>
+                        <div class="w-full bg-krypton-bg h-3.5 rounded-full overflow-hidden border border-krypton-gold/30 p-0.5">
+                            <div class="skill-bar bg-gradient-to-r from-krypton-red via-krypton-gold to-yellow-300 h-full rounded-full transition-all duration-1000 ease-out shadow-lg" style="width: 0%" data-target="99%"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-sm font-orbitron mb-1.5">
+                            <span class="text-gray-100 flex items-center gap-2 font-bold">
+                                <i class="fa-solid fa-bowling-ball text-krypton-red"></i> Kryptonian Fast Bowling
+                            </span>
+                            <span class="text-krypton-gold font-russo">95%</span>
+                        </div>
+                        <div class="w-full bg-krypton-bg h-3.5 rounded-full overflow-hidden border border-krypton-gold/30 p-0.5">
+                            <div class="skill-bar bg-gradient-to-r from-krypton-red via-krypton-gold to-yellow-300 h-full rounded-full transition-all duration-1000 ease-out shadow-lg" style="width: 0%" data-target="95%"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-sm font-orbitron mb-1.5">
+                            <span class="text-gray-100 flex items-center gap-2 font-bold">
+                                <i class="fa-solid fa-gauge-high text-krypton-brightBlue"></i> Super Speed & Agility
+                            </span>
+                            <span class="text-krypton-gold font-russo">92%</span>
+                        </div>
+                        <div class="w-full bg-krypton-bg h-3.5 rounded-full overflow-hidden border border-krypton-gold/30 p-0.5">
+                            <div class="skill-bar bg-gradient-to-r from-krypton-red via-krypton-gold to-yellow-300 h-full rounded-full transition-all duration-1000 ease-out shadow-lg" style="width: 0%" data-target="92%"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-sm font-orbitron mb-1.5">
+                            <span class="text-gray-100 flex items-center gap-2 font-bold">
+                                <i class="fa-solid fa-eye text-red-500 animate-pulse"></i> Heat Vision & Focus
+                            </span>
+                            <span class="text-krypton-gold font-russo">96%</span>
+                        </div>
+                        <div class="w-full bg-krypton-bg h-3.5 rounded-full overflow-hidden border border-krypton-gold/30 p-0.5">
+                            <div class="skill-bar bg-gradient-to-r from-krypton-red via-krypton-gold to-yellow-300 h-full rounded-full transition-all duration-1000 ease-out shadow-lg" style="width: 0%" data-target="96%"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- HERO ACTIVATIONS & INTERESTS CARD -->
+            <section class="hero-card rounded-2xl p-6 krypton-corner flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between pb-4 mb-4 border-b border-krypton-gold/30">
+                        <h2 class="font-russo text-xl text-krypton-gold flex items-center gap-2 tracking-wide">
+                            <i class="fa-solid fa-dragon text-krypton-red"></i> HERO ACTIVATIONS
+                        </h2>
+                        <span class="text-[10px] font-orbitron text-krypton-steel">MATRIX TAGS</span>
+                    </div>
+
+                    <p class="text-sm text-krypton-steel mb-4 font-semibold">Select activation chip to preview Kryptonian sector data:</p>
+
+                    <div class="flex flex-wrap gap-2.5">
+                        <button class="interest-badge hero-card px-4 py-2 rounded-xl text-sm font-orbitron text-krypton-gold border-krypton-gold hover:bg-krypton-gold/20 transition flex items-center gap-2 active shadow-md" data-desc="Executing world-class cricket match strategy and solar-powered sixes.">
+                            <i class="fa-solid fa-trophy text-krypton-red"></i> World Cricket
+                        </button>
+                        <button class="interest-badge hero-card px-4 py-2 rounded-xl text-sm font-orbitron text-gray-300 hover:text-krypton-gold border-krypton-gold/20 transition flex items-center gap-2" data-desc="Super-speed response time in high-tier multiplayer games.">
+                            <i class="fa-solid fa-gamepad"></i> Tactical Gaming
+                        </button>
+                        <button class="interest-badge hero-card px-4 py-2 rounded-xl text-sm font-orbitron text-gray-300 hover:text-krypton-gold border-krypton-gold/20 transition flex items-center gap-2" data-desc="Guardianship over United States of Noakhali (USN) territory.">
+                            <i class="fa-solid fa-shield-halved"></i> USN Patrol
+                        </button>
+                        <button class="interest-badge hero-card px-4 py-2 rounded-xl text-sm font-orbitron text-gray-300 hover:text-krypton-gold border-krypton-gold/20 transition flex items-center gap-2" data-desc="Recharging internal solar power near Earth's yellow sun.">
+                            <i class="fa-solid fa-sun text-yellow-400"></i> Solar Recharge
+                        </button>
+                    </div>
+
+                    <div id="interestDesc" class="mt-6 p-4 rounded-xl bg-krypton-bg/80 border border-krypton-gold/40 text-xs text-krypton-gold font-mono shadow-inner">
+                        Executing world-class cricket match strategy and solar-powered sixes.
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- FORTRESS ARSENAL SPECS SECTION -->
+        <section class="hero-card rounded-3xl p-6 sm:p-8 krypton-corner border-2 border-krypton-gold/40">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 mb-6 border-b border-krypton-gold/30 gap-2">
+                <div>
+                    <h2 class="font-russo text-2xl text-white tracking-wider flex items-center gap-3">
+                        <i class="fa-solid fa-gem text-krypton-gold text-2xl animate-pulse"></i> FORTRESS ARSENAL SPECS
+                    </h2>
+                    <p class="text-xs font-orbitron text-krypton-steel mt-1">HEROIC EQUIPMENT AND SECTOR ALLOCATION</p>
+                </div>
+                <div class="text-xs font-orbitron text-krypton-gold bg-krypton-blue px-3.5 py-1.5 rounded-full border border-krypton-gold/40 self-start sm:self-auto font-bold shadow-md">
+                    FORTRESS STATUS: ONLINE
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="hero-card p-5 rounded-2xl border-krypton-gold/30 hover:border-krypton-gold transition group text-center cursor-pointer shadow-lg">
+                    <div class="w-14 h-14 mx-auto mb-3 rounded-2xl bg-gradient-to-br from-krypton-red to-red-800 flex items-center justify-center text-krypton-gold border border-krypton-gold group-hover:scale-110 transition shadow-lg">
+                        <i class="fa-solid fa-baseball-bat-ball text-2xl"></i>
+                    </div>
+                    <span class="text-[10px] font-orbitron text-krypton-steel block mb-1">PRIMARY WEAPON</span>
+                    <h3 class="font-russo text-white text-base group-hover:text-krypton-gold transition">Premium Cricket Bat</h3>
+                    <p class="text-xs text-krypton-steel mt-1.5">Solar-Charged Power Stroke Edition</p>
+                </div>
+
+                <div class="hero-card p-5 rounded-2xl border-krypton-gold/30 hover:border-krypton-gold transition group text-center cursor-pointer shadow-lg">
+                    <div class="w-14 h-14 mx-auto mb-3 rounded-2xl bg-gradient-to-br from-krypton-royal to-krypton-blue flex items-center justify-center text-krypton-gold border border-krypton-gold group-hover:scale-110 transition shadow-lg">
+                        <i class="fa-solid fa-shield-halved text-2xl"></i>
+                    </div>
+                    <span class="text-[10px] font-orbitron text-krypton-steel block mb-1">ARMOR SUIT</span>
+                    <h3 class="font-russo text-white text-base group-hover:text-krypton-gold transition">Kryptonian Suit</h3>
+                    <p class="text-xs text-krypton-steel mt-1.5">Indestructible Crimson Cape</p>
+                </div>
+
+                <div class="hero-card p-5 rounded-2xl border-krypton-gold/30 hover:border-krypton-gold transition group text-center cursor-pointer shadow-lg">
+                    <div class="w-14 h-14 mx-auto mb-3 rounded-2xl bg-gradient-to-br from-krypton-red to-red-800 flex items-center justify-center text-krypton-gold border border-krypton-gold group-hover:scale-110 transition shadow-lg">
+                        <i class="fa-solid fa-fort-awesome text-2xl"></i>
+                    </div>
+                    <span class="text-[10px] font-orbitron text-krypton-steel block mb-1">HERO BASE</span>
+                    <h3 class="font-russo text-white text-base group-hover:text-krypton-gold transition">USN Fortress</h3>
+                    <p class="text-xs text-krypton-steel mt-1.5">Noakhali Sector Headquarters</p>
+                </div>
+
+                <div class="hero-card p-5 rounded-2xl border-krypton-gold/30 hover:border-krypton-gold transition group text-center cursor-pointer shadow-lg">
+                    <div class="w-14 h-14 mx-auto mb-3 rounded-2xl bg-gradient-to-br from-krypton-royal to-krypton-blue flex items-center justify-center text-krypton-gold border border-krypton-gold group-hover:scale-110 transition shadow-lg">
+                        <i class="fa-solid fa-sun text-2xl"></i>
+                    </div>
+                    <span class="text-[10px] font-orbitron text-krypton-steel block mb-1">STEALTH & ENERGY</span>
+                    <h3 class="font-russo text-white text-base group-hover:text-krypton-gold transition">Class-S Solar Cell</h3>
+                    <p class="text-xs text-krypton-steel mt-1.5">Unbounded Yellow Sun Energy</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="text-center text-xs text-krypton-steel font-orbitron pt-4 border-t border-krypton-gold/20">
+            <p>© 2026 SAZZAD HOSSAIN DOSSIER • MAN OF STEEL EDITION • SECURED BY KRYPTONIAN SYSTEM</p>
+        </footer>
+
+    </div>
+
+    <!-- Notification Toast Message Box -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 hero-card px-5 py-3 rounded-xl border-2 border-krypton-gold text-krypton-gold font-russo text-sm flex items-center gap-3 shadow-2xl">
+        <i class="fa-solid fa-shield-halved text-krypton-red"></i>
+        <span id="toastMsg">Copied to Clipboard!</span>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- Justin Bieber Background Music Logic ---
+        const bgMusic = document.getElementById('bgMusic');
+        const musicToggleBtn = document.getElementById('musicToggleBtn');
+        const musicIcon = document.getElementById('musicIcon');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const volumeValue = document.getElementById('volumeValue');
+        const vizBars = document.querySelectorAll('.viz-bar');
+
+        let isPlaying = false;
+        bgMusic.volume = 0.6;
+
+        musicToggleBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicIcon.className = 'fa-solid fa-play text-sm';
+                vizBars.forEach(bar => bar.classList.add('paused'));
+                showToast('Justin Bieber Music Paused');
+                isPlaying = false;
+            } else {
+                bgMusic.play().then(() => {
+                    musicIcon.className = 'fa-solid fa-pause text-sm';
+                    vizBars.forEach(bar => bar.classList.remove('paused'));
+                    showToast('Playing: Justin Bieber - Stay (Krypton Mix)');
+                    isPlaying = true;
+                }).catch(err => {
+                    console.error("Audio playback prevented:", err);
+                    showToast('Tap play again to start audio');
+                });
+            }
+        });
+
+        volumeSlider.addEventListener('input', (e) => {
+            const val = e.target.value;
+            bgMusic.volume = val;
+            volumeValue.textContent = `${Math.round(val * 100)}%`;
+        });
+
+        // --- Superman Particle Canvas System (Gold Solar Sparks & Crimson Energy) ---
+        const canvas = document.getElementById('supermanCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        class SupermanParticle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2.5 + 0.8;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = -Math.random() * 0.8 - 0.2; // Floating upwards like solar embers
+                this.color = Math.random() > 0.4 ? '#ffd700' : '#ff003c'; // Gold or Crimson
+                this.alpha = Math.random() * 0.6 + 0.2;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.y < 0 || this.x < 0 || this.x > canvas.width) this.reset();
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = 12;
+                ctx.shadowColor = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        const particles = Array.from({ length: 70 }, () => new SupermanParticle());
+        function animateSupermanParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animateSupermanParticles);
+        }
+        animateSupermanParticles();
+
+        // Progress Bar Intersection Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.skill-bar').forEach(bar => {
+                        bar.style.width = bar.getAttribute('data-target');
+                    });
+                }
+            });
+        }, { threshold: 0.2 });
+        document.querySelectorAll('section').forEach(sec => observer.observe(sec));
+
+        // Hero Activation Tag Badges Logic
+        const interestBadges = document.querySelectorAll('.interest-badge');
+        const interestDesc = document.getElementById('interestDesc');
+        interestBadges.forEach(badge => {
+            badge.addEventListener('click', () => {
+                interestBadges.forEach(b => {
+                    b.classList.remove('active', 'text-krypton-gold', 'border-krypton-gold');
+                    b.classList.add('text-gray-300', 'border-krypton-gold/20');
+                });
+                badge.classList.add('active', 'text-krypton-gold', 'border-krypton-gold');
+                badge.classList.remove('text-gray-300', 'border-krypton-gold/20');
+                interestDesc.textContent = badge.getAttribute('data-desc');
+            });
+        });
+
+        // Copy button toast response
+        const toast = document.getElementById('toast');
+        const toastMsg = document.getElementById('toastMsg');
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const textToCopy = btn.getAttribute('data-copy');
+                const tempInput = document.createElement('textarea');
+                tempInput.value = textToCopy;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempInput);
+                showToast(`Copied "${textToCopy}" to clipboard!`);
+            });
+        });
+
+        function showToast(message) {
+            toastMsg.textContent = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
